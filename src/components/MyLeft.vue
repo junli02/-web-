@@ -1,67 +1,77 @@
 <template>
-  <div>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-submenu index="2">
-        <template v-slot:title>我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template v-slot:title>选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>消息中心</el-menu-item>
-      <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-    </el-menu>
-    <div class="line"></div>
-    <el-menu
-        :default-active="activeIndex2"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b">
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-submenu index="2">
-        <template v-slot:title>我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template v-slot:title>选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>消息中心</el-menu-item>
-      <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-    </el-menu>
-  </div>
+  <el-row class="tac">
+    <el-col >
+      <el-menu
+          default-active="2"
+          class="el-menu-vertical-demo"
+          background-color="blue"
+          text-color="white"
+          router="router"
+          id="el"
+      >
+        <span >教师管理系统</span>
+        <hr>
+          <el-sub-menu index="1">
+            <template #title>个人信息管理</template>
+            <el-menu-item index="1-4-1">个人资料</el-menu-item>
+            <el-menu-item index="1-4-1">我的课程组</el-menu-item>
+          </el-sub-menu>
+        <el-sub-menu index="2">
+          <template #title>题目管理</template>
+          <el-menu-item index="1-4-1">题目列表</el-menu-item>
+          <el-menu-item index="1-4-1">批量导入</el-menu-item>
+        </el-sub-menu>
+        <el-sub-menu index="3">
+          <template #title>学生管理</template>
+          <el-menu-item index="3-4-1" route="/myContent" @click="change1('总体数据查看')">总体数据查看</el-menu-item>
+          <el-menu-item index="3-4-2" route="/myContent1" @click="change1('详细数据查看')">详细数据查看</el-menu-item>
+        </el-sub-menu>
+        <el-sub-menu index="4">
+          <template #title>试卷管理</template>
+          <el-menu-item index="1-4-1">试卷列表</el-menu-item>
+          <el-menu-item index="1-4-1">手动生成试卷</el-menu-item>
+        </el-sub-menu>
+
+      </el-menu>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
+
+
 export default {
-  data() {
-    return {
-      activeIndex: '1',
-      activeIndex2: '1'
-    };
+
+  name: 'MyLeft',
+  props: {
+
   },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+  methods:{
+    change1:function (data){
+      console.log(data+"子类");
+      this.$emit('MyChange',data);
     }
   }
 }
+
 </script>
 
 
 <style scoped>
+span{
+  margin-left: 10%;
+  font-size: 17px;
+  text-align: center;
+  color: #FFFFFF98;
+  border-bottom:  black;
+}
+a{
+  text-decoration: none;/*去掉下划线*/
+  color: rgba(255, 255, 255, 0.71);
+}
+
+#el{
+  border-right: 0;
+}
 
 </style>
