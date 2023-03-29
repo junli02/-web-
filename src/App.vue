@@ -50,9 +50,10 @@ export default {
     }
   },
   methods:{
-      MyChange:function (data){
-        console.log(data+"父类");
-        this.message2=data;
+      MyChange:function (data,data1){
+        //console.log(data+"父类");
+        this.message1=data;
+        this.message2=data1;
       }
   }
 

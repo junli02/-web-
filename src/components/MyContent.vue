@@ -1,10 +1,10 @@
 <template>
   <div class="form">
-    <form>
-      <span>课程</span> <input class="input1">
-      <span>班级</span> <input class="input1">
-      <span>姓名</span> <input class="input1">
-      <input id="in1" type="button" value="提交">
+    <form >
+      <span>课程</span> <input class="input1"  v-model="formData.data1">
+      <span>班级</span> <input class="input1" v-model="formData.data2">
+      <span>姓名</span> <input class="input1" v-model="formData.data3">
+      <input id="in1" type="button" value="提交" @click="getData">
     </form>
   </div>
   <div>
@@ -19,71 +19,64 @@
         <th>正确个数</th>
         <th>正确率</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>3</td>
-        <td>3</td>
-        <td>3</td>
-        <td>3</td>
-        <td>3</td>
-        <td>3</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
+      <tr v-for="data in trData" :key="data">
+        <td>{{data.studentId}}</td>
+        <td>{{data.course}}</td>
+        <td>{{data.class1}}</td>
+        <td>{{data.sex}}</td>
+        <td>{{data.major}}</td>
+        <td>{{data.questionNumber}}</td>
+        <td>{{data.rightNumber}}</td>
+        <td>{{data.rightRate}}</td>
       </tr>
 
     </table>
   </div>
   <div class="page">
-    <a href="#">></a>
-    <a href="#">1</a>
-    <a href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">></a>
+    <MyPage></MyPage>
   </div>
 </template>
 
 <script>
+import MyPage from "@/components/MyPage.vue";
+import axios from "axios";
+
 export default {
   name: "MyContent",
+  components: {MyPage},
   props:{
-    message:[
-      {name:[1,1,1,1,1,1,1]},
-      {name1:[1,1,1,1,1,1,1]},
-      {name2:[1,1,1,1,1,1,1]},
-      {name3:[1,1,1,1,1,1,1]}
-    ]
+
+  },
+  created() {
+    axios({
+      method:"get",
+      url: '/myData',
+    }).then(response =>{
+      console.log(response);
+      this.trData=response.data;
+    })
+  },
+  data(){
+    return {
+      trData:[
+        /*{studentId:1,course:"高级web",class:"大数据一班",sex:"男",major:"大数据",questionNumber:"10",rightNumber:"7",rightRate:"70%"},
+        {studentId:2,course:"高级web",class:"大数据一班",sex:"男",major:"大数据",questionNumber:"10",rightNumber:"6",rightRate:"60%"},
+        {studentId:3,course:"高级web",class:"大数据一班",sex:"男",major:"大数据",questionNumber:"10",rightNumber:"5",rightRate:"50%"},
+        {studentId:4,course:"高级web",class:"大数据一班",sex:"男",major:"大数据",questionNumber:"10",rightNumber:"5",rightRate:"50%"},*/
+      ],
+      formData:{data1:"1",data2:"2",data3:"3"}
+    }
+  },
+  methods:{
+    getData:function (){
+      axios({
+        method:"get",
+        url:'/getDataBy',
+        params:this.formData
+      }).then(res=>{
+        console.log(res);
+      })
+    }
   }
 }
 </script>
