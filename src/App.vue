@@ -118,7 +118,6 @@ MyTop{
   margin-right: 2%;
   align-content: center;
   background-color: white;
-  frameborder:no;
   border :0;
 }
 

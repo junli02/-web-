@@ -17,6 +17,12 @@ import MyContent42 from "@/components/page/MyContent42.vue";
 const routes = [
 // 路由的默认路径
     {
+        path: '/',
+        component: MyContent,
+        mode:'hash',
+
+    },
+    {
         path: '/MyContent',
         component: MyContent,
         mode:'hash',

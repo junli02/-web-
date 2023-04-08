@@ -17,8 +17,12 @@
       </div>
     </div>
     <div id="bottom1">
-      <img src="@/assets/img_2.png" id="img1">
+      <MyContent21></MyContent21>
+      <MyContent22></MyContent22>
+      <MyContent41></MyContent41>
+      <MyContent42></MyContent42>
     </div>
+
   </div>
   <div class="left">
     <div class="top1">
@@ -27,7 +31,7 @@
     </div>
     <div class="bottom1">
       <span>做题数目统计</span>
-      <img src="@/assets/img_1.png">
+         <MyContent11></MyContent11>
     </div>
   </div>
   <div class="right">
@@ -50,8 +54,38 @@
 </template>
 
 <script>
+
+
+
+
+
+
+import MyContent11 from "@/components/page/MyContent11.vue";
+import MyContent21 from "@/components/page/MyContent21.vue";
+import MyContent41 from "@/components/page/MyContent41.vue";
+import MyContent22 from "@/components/page/MyContent22.vue";
+import MyContent42 from "@/components/page/MyContent42.vue";
+
 export default {
-  name: "MyContent1"
+  name: "MyContent1",
+  components: {
+    MyContent42,
+    MyContent41,
+    MyContent21,
+    MyContent11,
+    MyContent22,
+
+
+  },
+  created() {
+    var elementsByTagName = document.getElementById("iframe");
+    elementsByTagName.style.backgroundColor="blue";
+  },
+  unmounted() {
+    var elementsByTagName = document.getElementById("iframe");
+    elementsByTagName.style.backgroundColor="white";
+  }
+
 }
 </script>
 
@@ -77,7 +111,7 @@ export default {
   margin-right: 1%;
   float: left;
   width: 49%;
-  height: 59%;
+  height: 60%;
   background-color: white;
 
 }
@@ -87,7 +121,7 @@ export default {
   margin-left: 1%;
   float: right;
   width: 49%;
-  height: 59%;
+  height: 60%;
   background-color: white;
 }
 #top1{
@@ -173,5 +207,9 @@ table,th,tr,td{
   padding:20px;
   text-align: left;
   width: 100%;
+}
+MyContent11{
+  width: 100px;
+  margin:0;
 }
 </style>

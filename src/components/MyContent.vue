@@ -1,9 +1,9 @@
 <template>
   <div class="form">
     <form >
-      <span>课程</span> <input class="input1"  v-model="formData.data1">
-      <span>班级</span> <input class="input1" v-model="formData.data2">
-      <span>姓名</span> <input class="input1" v-model="formData.data3">
+      <span>课程</span> <input class="input1"  v-model="formData.course">
+      <span>班级</span> <input class="input1" v-model="formData.class1">
+      <span>姓名</span> <input class="input1" v-model="formData.name">
       <input id="in1" type="button" value="提交" @click="getData">
     </form>
   </div>
@@ -13,6 +13,7 @@
         <th class="th">学号</th>
         <th>课程</th>
         <th>班级</th>
+        <th>姓名</th>
         <th>性别</th>
         <th>专业</th>
         <th>做题总数</th>
@@ -21,19 +22,20 @@
       </tr>
       <tr v-for="data in trData" :key="data">
         <td>{{data.studentId}}</td>
-        <td>{{data.course}}</td>
+        <td>{{data.course.course}}</td>
+        <td>{{data.name}}</td>
         <td>{{data.class1}}</td>
         <td>{{data.sex}}</td>
         <td>{{data.major}}</td>
-        <td>{{data.questionNumber}}</td>
-        <td>{{data.rightNumber}}</td>
-        <td>{{data.rightRate}}</td>
+        <td>{{data.course.questionNumber}}</td>
+        <td>{{data.course.rightNumber}}</td>
+        <td>{{data.course.rightRate}}</td>
       </tr>
 
     </table>
   </div>
   <div class="page">
-    <MyPage></MyPage>
+    <MyPage @getDataByPage="getDataByPage"></MyPage>
   </div>
 </template>
 
@@ -48,13 +50,13 @@ export default {
 
   },
   created() {
-    axios({
+    /*axios({
       method:"get",
-      url: '/myData',
+      url: '//getData?page=1&pageSize=2',
     }).then(response =>{
       console.log(response);
       this.trData=response.data;
-    })
+    })*/
   },
   data(){
     return {
@@ -64,18 +66,21 @@ export default {
         {studentId:3,course:"高级web",class:"大数据一班",sex:"男",major:"大数据",questionNumber:"10",rightNumber:"5",rightRate:"50%"},
         {studentId:4,course:"高级web",class:"大数据一班",sex:"男",major:"大数据",questionNumber:"10",rightNumber:"5",rightRate:"50%"},*/
       ],
-      formData:{data1:"1",data2:"2",data3:"3"}
+      formData:{course:"",class1:"",name:""}
     }
   },
   methods:{
     getData:function (){
       axios({
-        method:"get",
-        url:'/getDataBy',
+        method:"post",
+        url:'/selectStudent',
         params:this.formData
       }).then(res=>{
-        console.log(res);
+        this.trData=res.data.list;
       })
+    },
+    getDataByPage:function (data){
+      this.trData=data;
     }
   }
 }

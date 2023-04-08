@@ -1,10 +1,13 @@
 <template>
-  <h1>MyContent12</h1>
+  <MyContainer></MyContainer>
 </template>
 
 <script>
+import MyContainer from "@/components/MyContainer.vue";
+
 export default {
-  name: "MyContent12"
+  name: "MyContent12",
+  components: {MyContainer}
 }
 </script>
 
